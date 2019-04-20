@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace用于绑定DAO接口，即面向接口编程-->
+<mapper namespace="com.jnshu.mapper">
+    <!--resultMap属性：type为java实体类；id为此resulMap的标识-->
+    <resultMap id="studentMap" type="StudentMapper">
+        <!--propert 需要映射到Javabean的属性名称-->
+        <!--column 数据表的列明或者标签别名-->
+        <!--javaType 一个完整的类名，或者是一个类型别名。如果你匹配的是一个JavaBean，那MyBatis通常会自行检测到。
+        然后，如果你是要映射到一个HashMap，那你需要指定javaType要达到的目的。-->
+        <!-- jdbcType数据表支持的类型列表。这个属性只在insert,update或delete
+            的时候针对允许空的列有用。JDBC需要这项，但MyBatis 不需要。
+            如果你是直接针对JDBC编码，且有允许空的列，而你要指定这项-->
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="qq" column="qq" jdbcType="BIGINT"/>
+        <result property="type"  column="type" jdbcType="VARCHAR"/>
+        <result property="jointime" column="jointime" jdbcType="BIGINT"/>
+        <result property="technology" column="technology" jdbcType="VARCHAR"/>
+        <result property="jnshuID"  column="jnshuID" jdbcType="BIGINT"/>
+        <result property="daily" column="daily" jdbcType="VARCHAR"/>
+        <result property="wish" column="wish" jdbcType="VARCHAR"/>
+        <result property="brother"  column="brother" jdbcType="VARCHAR"/>
+        <result property="knowfrom" column="knowfrom" jdbcType="VARCHAR"/>
+        <result property="create_at" column="create_at" jdbcType="BIGINT"/>
+        <result property="update_at"  column="update_at" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <select id="selectStudent" parameterType="java.lang.String" resultMap="studentMap">
+        select * from jnshu where name =#{name}
+    </select>
+
+</mapper>
