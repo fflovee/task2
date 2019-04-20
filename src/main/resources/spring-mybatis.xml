@@ -6,9 +6,10 @@
     <!--在xml配置了这个标签后，spring可以自动扫描base-package下面的包的java文件，
     如果检测到@component@controller@service等注解的类，则把这些类注册为bean-->
     <!--扫描service包下所有使用注解的类型-->
-    <context:component-scan base-package="com.jnshu"/>
-    <!--配置数据库相关参数properties的属性-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:component-scan base-package="com.jnshu"/>
+    <context:annotation-config/>
+    <!--配置数据库相关参数properties的属性-->
     <!--数据库连接池-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
@@ -40,14 +41,10 @@
     <!--mybatis文件-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <!-- 配置数据库表对应的java实体类!!!!!!(一定记得改)-->
-        <property name="typeAliasesPackage" value="com.jnshu.pojo" />
         <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
         <property name="mapperLocations" value="classpath:mapper/*.xml" />
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.jnshu.mapper"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
-
 </beans>

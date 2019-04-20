@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--namespace用于绑定DAO接口，即面向接口编程-->
-<mapper namespace="com.jnshu.mapper">
+<mapper namespace="com.jnshu.mapper.StudentDao">
     <!--resultMap属性：type为java实体类；id为此resulMap的标识-->
-    <resultMap id="studentMap" type="StudentMapper">
+    <resultMap id="studentMap" type="com.jnshu.pojo.Student">
         <!--propert 需要映射到Javabean的属性名称-->
         <!--column 数据表的列明或者标签别名-->
         <!--javaType 一个完整的类名，或者是一个类型别名。如果你匹配的是一个JavaBean，那MyBatis通常会自行检测到。
