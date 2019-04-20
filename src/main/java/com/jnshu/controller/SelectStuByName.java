@@ -13,4 +13,5 @@ public class SelectStuByName {
     @Resource
     private StudentService studentService;
     private String stuName;
+    private String getStuNamel;
 }
