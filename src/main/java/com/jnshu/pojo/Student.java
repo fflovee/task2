@@ -4,7 +4,7 @@ public class Student {
 
     private Integer id, jointime, jnshuID, create_at, update_at;
     private long qq;
-    private String name, type, technology, daily, wish, brother, knowfrom;
+    private String name, student_type, technology, daily, wish, brother, knowfrom;
 
     @Override
     public String toString() {
@@ -16,7 +16,7 @@ public class Student {
                 ", update_at=" + update_at +
                 ", qq=" + qq +
                 ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
+                ", student_type='" + student_type + '\'' +
                 ", technology='" + technology + '\'' +
                 ", daily='" + daily + '\'' +
                 ", wish='" + wish + '\'' +
@@ -53,8 +53,8 @@ public class Student {
         return name;
     }
 
-    public String getType() {
-        return type;
+    public String getStudent_type() {
+        return student_type;
     }
 
     public String getTechnology() {
@@ -105,8 +105,8 @@ public class Student {
         this.name = name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setStudent_type(String type) {
+        this.student_type = type;
     }
 
     public void setTechnology(String technology) {

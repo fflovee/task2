@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--namespace用于绑定DAO接口，即面向接口编程-->
+<!--根目录节点，一个namespace对应一个DAO-->
 <mapper namespace="com.jnshu.mapper.StudentDao">
     <!--resultMap属性：type为java实体类；id为此resulMap的标识-->
     <resultMap id="studentMap" type="com.jnshu.pojo.Student">
         <!--propert 需要映射到Javabean的属性名称-->
         <!--column 数据表的列明或者标签别名-->
-        <!--javaType 一个完整的类名，或者是一个类型别名。如果你匹配的是一个JavaBean，那MyBatis通常会自行检测到。
+        <!--javaType 一个完整的类名，或者是一个类型别名。如果你匹配的是一个JavaBean，
+        那MyBatis通常会自行检测到。
         然后，如果你是要映射到一个HashMap，那你需要指定javaType要达到的目的。-->
         <!-- jdbcType数据表支持的类型列表。这个属性只在insert,update或delete
             的时候针对允许空的列有用。JDBC需要这项，但MyBatis 不需要。
@@ -14,7 +16,7 @@
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="qq" column="qq" jdbcType="BIGINT"/>
-        <result property="type"  column="type" jdbcType="VARCHAR"/>
+        <result property="student_type"  column="student_type" jdbcType="VARCHAR"/>
         <result property="jointime" column="jointime" jdbcType="BIGINT"/>
         <result property="technology" column="technology" jdbcType="VARCHAR"/>
         <result property="jnshuID"  column="jnshuID" jdbcType="BIGINT"/>
@@ -26,8 +28,76 @@
         <result property="update_at"  column="update_at" jdbcType="BIGINT"/>
     </resultMap>
 
-    <select id="selectStudent" parameterType="java.lang.String" resultMap="studentMap">
-        select * from jnshu where name =#{name}
+    <select id="selStuById" resultMap="studentMap">
+        select * from jnshu where id = #{id}
     </select>
+    
+    <select id="selStuByChoose" resultMap="studentMap">
+        select * from jnshu
+        <where>
+            <choose>
+                <when test="name != '' and name!=null">
+                    name=#{name}
+                </when>
+            </choose>
+            <choose>
+                <when test="jnshuID!='' and jnshuID!=null">
+                    and jnshuID=#{jnshuID}
+                </when>
+                <otherwise>
+                    and student_type=#{student_type}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    
+    <select id="selStuList" resultMap="studentMap">
+        select * from jnshu
+    </select>
+
+    <delete id="delStuById">
+        delete from jnshu where id = #{id}
+    </delete>
+
+    <insert id="insertStu" parameterType="com.jnshu.pojo.Student">
+        insert into jnshu
+        (id,name,qq,student_type,jointime,technology,jnshuID,daily,wish,brother,knowfrom,create_at,update_at)
+        values
+        (null,#{name},#{qq},#{student_type},#{jointime},#{technology},#{jnshuID},#{daily},#{wish},#{brother},#{knowfrom},#{create_at},#{update_at})
+    </insert>
+
+    <update id="updateStuByChoose">
+        update jnshu set
+        name=#{name},qq=#{qq},student_type=#{student_type},
+        jointime=#{jointime},technology=#{technology},
+        jnshuID=#{jnshuID},daily=#{daily},wish=#{wish},
+        brother=#{brother},knowfrom=#{knowfrom},
+        create_at=#{create_at},update_at=#{update_at}
+        where id=#{id}
+    </update>
+    
+    <update id="updateStu" parameterType="com.jnshu.pojo.Student">
+        update jnshu
+        <trim prefix="set" suffixOverrides=",">
+            <!--<if test="id != null">id=#{id},</if>-->
+            <if test="name!=null and name!=''">name=#{name},</if>
+            <if test="qq!=null and qq!=''">qq=#{qq},</if>
+            <if test="student_type!=null and student_type!=''">student_type=#{student_type},</if>
+            <if test="jointime!=null and jointime!=''">jointime=#{jointime},</if>
+            <if test="technology!=null and technology!=''">technology=#{technology},</if>
+            <if test="jnshuID!=null and jnshuID!=''">jnshuID=#{jnshuID},</if>
+            <if test="daily!=null and daily!=''">daily=#{daily},</if>
+            <if test="wish!=null and wish!=''">wish=#{wish},</if>
+            <if test="brother!=null and brother!=''">brother=#{brother},</if>
+            <if test="knowfrom!=null and knowfrom!=''">knowfrom=#{knowfrom},</if>
+            <if test="create_at!=null and create_at!=''">create_at=#{create_at},</if>
+            <if test="update_at!=null and update_at!=''">update_at=#{update_at},</if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <update id="updateStudent">
+        update jnshu set ${key} = #{value} where id=#{id}
+    </update>
 
 </mapper>
