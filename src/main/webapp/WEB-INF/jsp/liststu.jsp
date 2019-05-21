@@ -6,14 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
-<%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
+<%--<%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page isELIgnored="false" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<%--<%@ page isELIgnored="false" %>--%>
 <html>
 <head>
     <title>查询学生信息表</title>
 </head>
 <body>
+
     <p>全部学生信息</p>
     <table border="1">
         <tr>
@@ -49,8 +52,8 @@
                 <td>${stu.create_at}</td>
                 <td>${stu.update_at}</td>
                 <td>
-                    <form action="/student/delete/${stu.id}" method="post">
-                        <input type="hidden" name="_method" value="delete">
+                    <form action="/student/del/${stu.id}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
                         <input type="submit" value="删除">
                     </form>
                 </td>
@@ -61,18 +64,24 @@
                 </td>
             </tr>
         </c:forEach>
+
     </table>
+
+    <%--<div>--%>
+        <%--<spring:message code="${code}"/>--%>
+        <%--&lt;%&ndash;${code}&ndash;%&gt;--%>
+        <%--<p>11111111111121222</p></div>--%>
+<%--    <div style="text-align:center">
+        <a href="?start=0">首  页</a>
+        <a href="?start=${pageInfo.start-pageInfo.count}">上一页</a>
+        <a href="?start=${pageInfo.start+pageInfo.count}">下一页</a>
+        <a href="?start=${pageInfo.last}">末  页</a>
+    </div>--%>
     <div align="center">
         <a href="/page/${pageInfo}">上一页</a>
         <a href="/page/${pageInfo}">下一页</a>
         <a href="/student/addstu">添加学生</a>
     </div>
 
-    <%--    <br>
-    <a href="/page/${pageInfo}-1">上一页</a>
-    <a href="/page/${pageInfo}+1">下一页</a>
-    <a href="/add">添加</a>
-    <br>
-    <span>共${pageInfo.pages}页</span>--%>
 </body>
 </html>

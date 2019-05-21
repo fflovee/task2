@@ -1,36 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <display-name>Archetype Created Web Application</display-name>
-
-  <!--前端控制器-->
-  <servlet>
-    <servlet-name>springmvc</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring-mvc.xml</param-value>
-    </init-param>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>springmvc</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
-  
-  <welcome-file-list>
-    <welcome-file>/WEB-INF/jsp/home.jsp</welcome-file>
-  </welcome-file-list>
-
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring-mybatis.xml</param-value>
-  </context-param>
-
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
 
   <!--统一编码-->
   <filter>
@@ -50,7 +23,7 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-<!--spring mvc过滤器： 浏览器form表单只支持GET与POST请求，
+  <!--spring mvc过滤器： 浏览器form表单只支持GET与POST请求，
 而DELETE、PUT等method并不支持，spring3.0添加了一个过滤器，
 可以将这些请求转换为标准的http方法，使得支持GET、POST、PUT与DELETE请求，
 该过滤器为HiddenHttpMethodFilter。-->
@@ -62,4 +35,34 @@
     <filter-name>hiddenHttpMethodFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+  <!--前端控制器-->
+  <!--用户发送请求到前端控制器DispatcherServlet-->
+  <servlet>
+    <servlet-name>springMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name><!--参数名-->
+      <param-value>classpath:spring-mvc.xml</param-value><!--参数值-->
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>springMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>/WEB-INF/jsp/home.jsp</welcome-file>
+  </welcome-file-list>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-mybatis.xml</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
 </web-app>

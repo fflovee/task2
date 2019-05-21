@@ -31,7 +31,11 @@
     <select id="selStuById" resultMap="studentMap">
         select * from jnshu where id = #{id}
     </select>
-    
+
+    <select id="selCount" resultType="int">
+        select count (*) from jnshu
+    </select>
+
     <select id="selStuByChoose" resultMap="studentMap">
         select * from jnshu
         <where>
@@ -50,15 +54,15 @@
             </choose>
         </where>
     </select>
-    
+    <!--根据主键查询-->
     <select id="selStuList" resultMap="studentMap">
         select * from jnshu
     </select>
-
+    <!--根据主键删除-->
     <delete id="delStuById">
         delete from jnshu where id = #{id}
     </delete>
-
+    <!--插入学员信息-->
     <insert id="insertStu" parameterType="com.jnshu.pojo.Student">
         insert into jnshu
         (id,name,qq,student_type,jointime,technology,jnshuID,daily,wish,brother,knowfrom,create_at,update_at)

@@ -5,15 +5,15 @@
   Time: 19:36
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
-<%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--<%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>--%>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <%@ page isELIgnored="false" %>
 <form action="/student/add" method="post">
     姓名<input type="text" name="name"><br>
